@@ -1,7 +1,7 @@
 ﻿using System;
 using Sprache;
 
-namespace UgValidator
+namespace Uganda
 {
     public static class PhoneNumber
     {

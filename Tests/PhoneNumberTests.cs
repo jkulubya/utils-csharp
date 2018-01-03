@@ -1,6 +1,6 @@
 using System;
 using Sprache;
-using UgValidator;
+using Uganda;
 using Xunit;
 
 namespace Tests
