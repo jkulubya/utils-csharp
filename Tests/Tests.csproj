@@ -12,4 +12,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Uganda\Uganda.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="PhoneNumberTestsData\validnumbers.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="PhoneNumberTestsData\invalidnumbers.txt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

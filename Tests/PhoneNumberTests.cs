@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Sprache;
 using Uganda;
 using Xunit;
@@ -8,22 +9,7 @@ namespace Tests
     public class PhoneNumberTests
     {
         [Theory]
-        [InlineData("  0700192133")]
-        [InlineData("0700192133  ")]
-        [InlineData("  0700192133  ")]
-        [InlineData("0700192133")]
-        [InlineData("  700192133")]
-        [InlineData("700192133  ")]
-        [InlineData("  700192133  ")]
-        [InlineData("700192133")]
-        [InlineData("  256700192133")]
-        [InlineData("256700192133  ")]
-        [InlineData("  256700192133  ")]
-        [InlineData("256700192133")]
-        [InlineData("  +256700192133")]
-        [InlineData("+256700192133  ")]
-        [InlineData("  +256700192133  ")]
-        [InlineData("+256700192133")]
+        [FlatFileData("PhoneNumberTestsData/validnumbers.txt")]
         public void ParseWithValidNumber(string value)
         {
             var number = PhoneNumber.Parse(value);
@@ -32,22 +18,7 @@ namespace Tests
         }
         
         [Theory]
-        [InlineData("  0700192133")]
-        [InlineData("0700192133  ")]
-        [InlineData("  0700192133  ")]
-        [InlineData("0700192133")]
-        [InlineData("  700192133")]
-        [InlineData("700192133  ")]
-        [InlineData("  700192133  ")]
-        [InlineData("700192133")]
-        [InlineData("  256700192133")]
-        [InlineData("256700192133  ")]
-        [InlineData("  256700192133  ")]
-        [InlineData("256700192133")]
-        [InlineData("  +256700192133")]
-        [InlineData("+256700192133  ")]
-        [InlineData("  +256700192133  ")]
-        [InlineData("+256700192133")]
+        [FlatFileData("PhoneNumberTestsData/validnumbers.txt")]
         public void TryParseWithValidNumber(string value)
         {
             PhoneNumber.TryParse(value, out var number);
@@ -56,45 +27,15 @@ namespace Tests
         }
 
         [Theory]
-        [InlineData("  070022233345675767")]
-        [InlineData("070022233345675767  ")]
-        [InlineData("  070022233345675767  ")]
-        [InlineData("070022233345675767")]
-        [InlineData("  70022233345675767")]
-        [InlineData("70022233345675767  ")]
-        [InlineData("  70022233345675767  ")]
-        [InlineData("70022233345675767")]
-        [InlineData("  25670022233345675767")]
-        [InlineData("25670022233345675767  ")]
-        [InlineData("  25670022233345675767  ")]
-        [InlineData("25670022233345675767")]
-        [InlineData("  +25670022233345675767")]
-        [InlineData("+25670022233345675767  ")]
-        [InlineData("  +25670022233345675767  ")]
-        [InlineData("+25670022233345675767")]
-        public void ParseShouldThrowWhenNumberIsTooLong(string value)
+        [FlatFileData("PhoneNumberTestsData/invalidnumbers.txt")]
+        public void ParseShouldThrowWhenNumberIsInvalid(string value)
         {
             Assert.Throws<FormatException>(() => PhoneNumber.Parse(value));
         }
         
         [Theory]
-        [InlineData("  070022233345675767")]
-        [InlineData("070022233345675767  ")]
-        [InlineData("  070022233345675767  ")]
-        [InlineData("070022233345675767")]
-        [InlineData("  70022233345675767")]
-        [InlineData("70022233345675767  ")]
-        [InlineData("  70022233345675767  ")]
-        [InlineData("70022233345675767")]
-        [InlineData("  25670022233345675767")]
-        [InlineData("25670022233345675767  ")]
-        [InlineData("  25670022233345675767  ")]
-        [InlineData("25670022233345675767")]
-        [InlineData("  +25670022233345675767")]
-        [InlineData("+25670022233345675767  ")]
-        [InlineData("  +25670022233345675767  ")]
-        [InlineData("+25670022233345675767")]
-        public void TryParseShouldReturnNullWhenNumberIsTooLong(string value)
+        [FlatFileData("PhoneNumberTestsData/invalidnumbers.txt")]
+        public void TryParseShouldReturnNullWhenNumberIsInvalid(string value)
         {
             PhoneNumber.TryParse(value, out var number);
             
